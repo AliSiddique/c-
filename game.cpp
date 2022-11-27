@@ -28,7 +28,6 @@ void game::move(const std::string &name, int dir){
 
 	}
 	if(robots.count(name) < 0){
-		
 		robots[name];
 		move(name,dir);
 	}
@@ -57,35 +56,25 @@ int game::max_travelled() const {
 		}
 	}
 	return distance;
-}
-// bool compare_recent(const std::map<std::string, double> &x,
-// 		const std::map<std::string, double> &y) {
-// 	return x.second > y.second;
-// }
-// std::vector<std::string> game::robots_by_distance()const {
-// 	std::vector<std::string, double>all;
-// 	for (const auto &p : robots)
-// 		all.push_back(vector<std::string, double>(p.first,
-// 			p.second));
+};
 
-// 	std::sort(all.cbegin(), all.cend());
+bool compare_recent(const pair<string, double> &x,
+		const pair<string, double> &y) {
+	return x.second < y.second;
+};
+vector<string> game::robots_by_distance() const {
+	// copy all players and recent averages into a vector
+	vector<pair<string, double>> all;
+	for (const auto &p : robots)
+		all.push_back(pair<string, double>(p.first,
+			p.second.travelled()));
 
-// 	std::vector<string> best;
-// 	for (const auto &p : all)
-// 		best.push_back(p.first);
-// 	return best;
-// }
-// is the player a novice?
-// bool travel(const pair<string, robot> &p) {
+	// sort in decreasing order of recent average
+	sort(all.begin(), all.end(), compare_recent);
 
-// 	return p.second.travelled();
-// }
-
-// the number of novice players
-//  std::vector<std::string> game::robots_by_distance() const{
-// 	sort(robots.cbegin(), robots.cend(), travel);
-//     std::vector<std::string> names;
-// 	for (const auto &p : names)
-// 		robots.push_back(p.first);
-// 	return names;
-// };
+	// copy strings to a new vector for return
+	vector<string> best;
+	for (const auto &p : all)
+		best.push_back(p.first);
+	return best;
+};

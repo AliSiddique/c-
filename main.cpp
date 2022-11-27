@@ -1,6 +1,7 @@
 #include "robot.h"
 #include "game.h"
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main(){
@@ -16,13 +17,23 @@ int main(){
     game g;
   cout << "Count before: " << g.num_robots() << '\n';
   g.move("Marvin", 2); // south
+    g.move("Marvin", 2); // south
+  g.move("Marvin", 2); // south
+  g.move("Marvin", 2); // south
+  g.move("Marvin", 2); // south
+
   g.move("Robbie", 3); // west
+g.move("Robbie", 3); // west
+  g.move("Robbie", 3); // west
+
 
   cout << "Count after: " << g.num_robots() << '\n';
   cout << "Furtherest travelled: " << g.max_travelled() << '\n';
   cout << "Within 0 steps: " << g.num_within(0) << '\n';
   cout << "Within 1 steps: " << g.num_within(1) << '\n';
-//   for (const auto &name : g.robots_by_distance())
-//     cout << name << '\n';
-   return 0;
+  for (const auto &name : g.robots_by_distance()){
+    cout << name << '\n';
+
+  };
+return 0;
 };
