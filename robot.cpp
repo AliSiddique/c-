@@ -43,9 +43,9 @@ int robot::east() const {
 // rerurn the total distance travelled by the robot
 int robot::travelled() const {
    int x = north()  + south;
-   int y = east() + west;
+   int y = east()  + west;
     int tot = x + y;
-   return tot;
+   return total_distance;
 
 };
 // return the distance of the robot to the origin

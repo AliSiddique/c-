@@ -2,6 +2,7 @@
 #include "robot.h"
 #include <algorithm>
 #include <map>
+#include <cstdlib>
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -37,7 +38,7 @@ void game::move(const std::string &name, int dir){
 int game::num_within(int n)const {
 	int num_wit = 0;
 	for (const auto &p : robots) {
-		double overall = p.second.travelled();
+		double overall = abs(p.second.north() - 0) + (p.second.east() - 0);
 		if (overall <= n ) {
 			++num_wit;
 		}
