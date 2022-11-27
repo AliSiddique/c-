@@ -35,17 +35,17 @@ void game::move(const std::string &name, int dir){
 
 };
 
-// int game::num_within(int n)const {
-// };
-// bool max(const pair<string, robot> &p) {
+int game::num_within(int n)const {
+	int num_wit = 0;
+	for (const auto &p : robots) {
+		double overall = p.second.travelled();
+		if (overall <= n ) {
+			++num_wit;
+		}
+	}
+	return num_wit;
+};
 
-// 	return p.second.travelled();
-// }
-// int game::max_travelled() const {
-	
-
-// 	return robots.end()
-// };
 int game::max_travelled() const {
 	double best_yet = 0;
 	double distance = 0;
