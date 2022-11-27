@@ -60,7 +60,7 @@ int game::max_travelled() const {
 
 bool compare_recent(const pair<string, double> &x,
 		const pair<string, double> &y) {
-	return x.second < y.second;
+	return x.second > y.second;
 };
 vector<string> game::robots_by_distance() const {
 	// copy all players and recent averages into a vector
