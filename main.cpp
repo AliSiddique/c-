@@ -19,6 +19,12 @@ int main(){
   g.move("Robbie", 1); // east
   g.move("Marvin", 2); // south
   g.move("Robbie", 3); // west
+  g.move("ali", 2); // west
+    g.move("ali", 2); // west
+
+
+
+
   
   cout << "Count after: " << g.num_robots() << '\n';
   cout << "Furtherest travelled: " << g.max_travelled() << '\n';

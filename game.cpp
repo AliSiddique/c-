@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <string>
 using namespace std;
 
 // returns the number of robots in a game
@@ -48,9 +49,9 @@ int game::num_within(int n)const {
 	// loop through map to find robots
 	for (const auto &p : robots) {
 		// calculates distance from the origin
-		int distance = abs(p.second.north() - 0) + (p.second.east() - 0);
+		int distanc = distance(p.second);
 		// if distance is within n steps
-		if (distance <= n ) {
+		if (distanc <= n ) {
 			// increment num_with by 1
 			++num_wit;
 		}
@@ -80,7 +81,7 @@ int game::max_travelled() const {
 // compare the robots distance from the origin
 bool compare_distance(const pair<string, double> &x,
 		const pair<string, double> &y) {
-	return x.second > y.second;
+	return x.second < y.second;
 };
 
 // the collection of names in the game 
@@ -91,7 +92,7 @@ vector<string> game::robots_by_distance() const {
 	for (const auto &p : robots)
 	// add robot names and distance travelled to the vector
 		all_robots.push_back(pair<string, double>(p.first,
-			p.second.travelled()));
+			distance(p.second)));
 
 	// sort in ascending order of distance from the origin
 	sort(all_robots.begin(), all_robots.end(), compare_distance);
