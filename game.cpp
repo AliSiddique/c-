@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+game::game(){};
 // returns the number of robots in a game
 int game::num_robots() const {
     return robots.size(); // returns the map size
@@ -32,13 +32,14 @@ void game::move(const std::string &name, int dir){
     robots[name].move_west();
 
 	}
-	// if robots name is not in the game
-	if(robots.count(name) < 0){
+			// if robots name is not in the game
+	if(robots.count(name) < 1){
 		// add robot to the game
 		robots[name];
 		// move the named robot in the specified direction
 		move(name,dir);
 	}
+
 
 };
 
@@ -47,13 +48,17 @@ int game::num_within(int n)const {
 	int num_wit = 0; // variable to count number of robots with n steps of origin
 
 	// loop through map to find robots
-	for (const auto &p : robots) {
-		// calculates distance from the origin
-		int distanc = distance(p.second);
-		// if distance is within n steps
-		if (distanc <= n ) {
-			// increment num_with by 1
-			++num_wit;
+	// for (const auto &p : robots) {
+	// 	// calculates distance from the origin
+	// 	// if distance is within n steps
+	// 	if (distance(p.second) <= n ) {
+	// 		// increment num_with by 1
+	// 		num_wit++;
+	// 	}
+	// }
+	for(auto itr = robots.begin(); itr != robots.end();++itr){
+		if(distance((*itr).second) <= n){
+			num_wit++;
 		}
 	}
 	// return the number of robots within the distance
@@ -78,29 +83,24 @@ int game::max_travelled() const {
 	return furthest_travelled;
 };
 
-// compare the robots distance from the origin
-bool compare_distance(const pair<string, double> &x,
+bool compare_recent(const pair<string, double> &x,
 		const pair<string, double> &y) {
 	return x.second < y.second;
 };
-
-// the collection of names in the game 
+// compare the robots distance from the origin
 vector<string> game::robots_by_distance() const {
-
 	// copy all robots and their names into a vector
-	vector<pair<string, double>> all_robots;
+	vector<pair<string, double>> all;
 	for (const auto &p : robots)
-	// add robot names and distance travelled to the vector
-		all_robots.push_back(pair<string, double>(p.first,
+		all.push_back(pair<string, double>(p.first,
 			distance(p.second)));
 
-	// sort in ascending order of distance from the origin
-	sort(all_robots.begin(), all_robots.end(), compare_distance);
+	// sort in decreasing order of distance
+	sort(all.begin(), all.end(), compare_recent);
 
-	// copy names of the robots to a new vector
-	vector<string> names_order;
-	for (const auto &p : all_robots)
-	// add the names of the robots to the vector
-		names_order.push_back(p.first);
-	return names_order;
+	// copy strings to a new vector for return
+	vector<string> order;
+	for (const auto &p : all)
+		order.push_back(p.first);
+	return order;
 };

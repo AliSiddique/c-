@@ -8,7 +8,7 @@ class game {
     
    std::map<std::string, robot> robots;  // map holding the names and the robot
 public:
-    game(){}; // game constructor
+    game(); // game constructor
     
     int num_robots() const; // returns the total number of robots in the game
     

@@ -35,23 +35,22 @@ void robot::move_west(){
 // return the distance north of the robot
 int robot::north() const {
    // if south distance is greater or equal to the north distance subtract both from each other
-   if(south_distance > north_distance || south_distance == north_distance){
-      int north = north_distance - south_distance;
-      return north;
-   }
+   // if(south_distance > north_distance || south_distance == north_distance){
+   //    int north = north_distance - south_distance;
+   //    return north;
+   // }
    // if south distance is not greater than north return the north distance
-   return north_distance;
+  int north = north_distance - south_distance;
+      return north;
 };
 
 // return the distance east of the robot
 int robot::east() const {
       // if west distance is greater or equal to the east distance subtract both from each other
-   if(west_distance > east_distance || west_distance == east_distance){
-      int eas = east_distance - west_distance;
-      return eas;
-   }
+  
    // if west distance is not greater than east return the north distance
-   return east_distance;
+  int eas = east_distance - west_distance;
+      return eas;
 };
 
 // return the total distance the robot has travelled
@@ -61,5 +60,5 @@ int robot::travelled() const {
 
 // calculates the manhatten matric from the origin
 int distance(const robot &r){
-  return abs(r.north() - 0) + (r.east() - 0);
-};
+  return abs(r.north()) + abs(r.east());
+}
